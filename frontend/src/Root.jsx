@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import App from "./App.jsx";
+import App from "./App";
 import { AnonAadhaarProvider } from "@anon-aadhaar/react";
 
 function Root() {
