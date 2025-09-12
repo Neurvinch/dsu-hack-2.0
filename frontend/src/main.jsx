@@ -6,7 +6,19 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PrivyProvider>
+    <PrivyProvider
+       appId='cmfghtgp40028jy0cwtuhwaq2'
+       clientId='client-WY6QhTzTzEKzCAzBLW6pu5M4qwxqpKj6EHGJvJ6zEwcyz'
+       config={{
+        embeddedWallets: {
+          ethereum: {
+            createOnLogin: "users-without-wallets"
+          },
+          
+          
+        }
+       }}
+    >
       <App />
     </PrivyProvider>
     
