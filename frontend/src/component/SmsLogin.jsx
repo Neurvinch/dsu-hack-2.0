@@ -8,7 +8,17 @@ const SmsLogin = () => {
     const {state, sendCode, loginWithCode} = useLoginWithSms()
 
     const handleSendCode = async () => {
+        try { 
+            await sendCode({phoneNumber})
+            
+        } catch (error) {
+            console.error("Error sending OTP:", error);
+        }
+    }
+
+    const handleLogin = async  () => {
         try {
+            await loginWithCode({code})
             
         } catch (error) {
             
