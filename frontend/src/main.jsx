@@ -15,6 +15,8 @@ createRoot(document.getElementById('root')).render(
           ethereum: {
             createOnLogin: "users-without-wallets"
           },
+          defaultChain: polygonZkEvmTestnet,
+          supportedChains: [polygonZkEvmTestnet, arbitrum, arbitrumSepolia]
           
           
         }
