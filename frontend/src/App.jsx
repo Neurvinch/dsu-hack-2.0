@@ -8,9 +8,11 @@ import {
   Navigate,
   useNavigate
 } from 'react-router-dom';
+import MerkleTreeComponent from './components/MerkleTreeComponent';
 
 import Login from './components/Login';
 import AnonAadhaar from './pages/AnonAadhaar';
+
  // optional
 
 function RequireWalletAndAuth({ children }) {
@@ -48,11 +50,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path="/login" element={<Login />} />
         <Route
           path="/anon-aadhaar"
           element={<AnonAadhaar />}
         />
+      <Route path="/merkletree" element={<MerkleTreeComponent />} />
         <Route
           path="/"
           element={<RequireWalletAndAuth />}  // guard for initial route
