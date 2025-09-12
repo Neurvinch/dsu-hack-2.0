@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {PrivyProvider} from "@privy-io/react-auth"
+import {polygonZkEvmTestnet, arbitrum,arbitrumSepolia} from "viem/chains"
 import './index.css'
 import App from './App.jsx'
 
