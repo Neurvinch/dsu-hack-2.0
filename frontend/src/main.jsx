@@ -11,6 +11,10 @@ createRoot(document.getElementById('root')).render(
        appId='cmfghtgp40028jy0cwtuhwaq2'
        clientId='client-WY6QhTzTzEKzCAzBLW6pu5M4qwxqpKj6EHGJvJ6zEwcyz'
        config={{
+                 intl: {
+                  defaultCountry: "IN"
+                 },
+          
         embeddedWallets: {
           ethereum: {
             createOnLogin: "users-without-wallets"

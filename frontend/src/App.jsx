@@ -1,6 +1,7 @@
 import {usePrivy} from "@privy-io/react-auth"
 
 import './App.css'
+import SmsLogin from "./component/SmsLogin";
 
 function App() {
   const {ready,authenticated,user,login,logout} = usePrivy()
@@ -12,8 +13,11 @@ function App() {
   if (!authenticated) {
     return (
       <button onClick={() => login()}>Login</button>
+     
     );
   }
+     
+  
 
   return (
     <div>
