@@ -20,7 +20,7 @@ function App() {
       <p>Welcome, {user?.id}</p>
       <button onClick={() => logout()}>Logout</button>
     </div>
-    
+
   )
 }
 
