@@ -28,7 +28,7 @@ export default function anonAadhaar() {
         </p>
 
         <LogInWithAnonAadhaar
-          fieldsToReveal={["revealGender", "revealAgeAbove18", "revealState"]}
+          fieldsToReveal={["revealGender", "revealAgeAbove18", "revealState", "revealPinCode"]}
           nullifierSeed={1234}
         />
 
