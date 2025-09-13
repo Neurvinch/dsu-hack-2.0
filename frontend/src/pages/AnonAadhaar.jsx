@@ -4,17 +4,57 @@ import {
   useAnonAadhaar,
   useProver,
 } from "@anon-aadhaar/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";  // Add useState
+import { useNavigate } from "react-router-dom";  // For redirect
+import axios from "axios";
+import { keccak256, toUtf8Bytes } from "ethers/lib/utils";  // If not installed, npm install ethers
 
-export default function AnonAadhaar() {   // ✅ Capitalized
+export default function AnonAadhaar() {
   const [anonAadhaar] = useAnonAadhaar();
   const [, latestProof] = useProver();
+  const navigate = useNavigate();  // For navigation
+
+  const [nullifierHash, setNullifierHash] = useState("");  // To compute hash
 
   useEffect(() => {
-    if (anonAadhaar.status === "logged-in") {
+    if (anonAadhaar.status === "logged-in" && latestProof) {
       console.log("User logged in:", anonAadhaar);
+
+      // Compute nullifierHash
+      let hash = "";
+      try {
+        hash = latestProof.proof.nullifier
+          ? keccak256(toUtf8Bytes(String(latestProof.proof.nullifier)))
+          : "";
+      } catch (e) {
+        console.warn("Failed to compute nullifierHash:", e);
+      }
+      setNullifierHash(hash);
+
+      // Extract profile from proof (claim)
+      const { claim = {} } = latestProof;
+      const initialProfile = {
+        state: claim.state || "",
+        pincode: claim.pincode || "",
+        ageAbove18: claim.ageAbove18 || false,
+        gender: claim.gender || "",
+      };
+
+      // Send to backend for login/session
+      axios
+        .post("http://localhost:5000/api/auth/login-anon", {
+          nullifierHash: hash,
+          profile: initialProfile,
+        })
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("role", res.data.user.role);
+          localStorage.setItem("profile", JSON.stringify(res.data.user.profile));
+          navigate("/profile-setup");  // Redirect to profile setup
+        })
+        .catch((err) => console.error("Login failed:", err));
     }
-  }, [anonAadhaar]);
+  }, [anonAadhaar.status, latestProof, navigate]);
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">

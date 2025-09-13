@@ -12,6 +12,10 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
 import Docs from './pages/Docs'
+import ProfileSetup from './pages/ProfileSetup'
+import DeptLogin from './pages/DepLogin'
+import PeopleDashboard from './pages/PeopleDashboard'
+import PoliceDashboard from './pages/PolicDashboard'
 
 // 🔹 Friend’s components
 import Login from './components/Login'
@@ -69,6 +73,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
             <Route path="/docs" element={<Docs />} />
+            <Route path="/profile-setup" element={<ProfileSetup />} />
+            <Route path="/dep-login" element={<DeptLogin />} />
+            <Route path="/people-dashboard" element={<PeopleDashboard />} />
+            <Route path="/police-dashboard" element={<PoliceDashboard />} />
 
             {/* Friend’s routes */}
             <Route path="/login" element={<Login />} />
