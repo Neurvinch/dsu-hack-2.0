@@ -1,70 +1,95 @@
 // src/App.jsx
-import React, { useEffect } from 'react';
-import { usePrivy, useWallets } from '@privy-io/react-auth';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  useNavigate
-} from 'react-router-dom';
-import MerkleTreeComponent from './components/MerkleTreeComponent';
+import { useEffect , useRef } from 'react'
+import { BrowserRouter as Router, Routes, Route, useNavigate , useLocation} from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
-import Login from './components/Login';
-import AnonAadhaar from './pages/AnonAadhaar';
+// 🔹 Privy Auth
+import { usePrivy, useWallets } from '@privy-io/react-auth'
 
- // optional
+// 🔹 Your components
+import Header from './components/Header'
+import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import About from './pages/About'
+import Docs from './pages/Docs'
 
-function RequireWalletAndAuth({ children }) {
-  const { ready, authenticated } = usePrivy();
-  const { wallets } = useWallets();
-  const navigate = useNavigate();
+// 🔹 Friend’s components
+import Login from './components/Login'
+import AnonAadhaar from './pages/AnonAadhaar'
+import MerkleTreeComponent from './components/MerkleTreeComponent'
+
+import './index.css'
+
+// 🔹 Guarded Route (Wallet + Auth required)
+function RequireWalletAndAuth() {
+  const { ready, authenticated } = usePrivy()
+  const { wallets } = useWallets()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // ✅ Prevent multiple navigations
+  const hasNavigated = useRef(false)
 
   useEffect(() => {
-    if (!ready) return;  // wait till ready
+    if (!ready) return
 
+    // If not authenticated → redirect to login once
     if (!authenticated) {
-      // not logged in → redirect to login
-      navigate('/login');
-      return;
-    }
-    // If logged in, but no wallet yet, maybe wait or force wallet creation
-    // But since we set createOnLogin, wallet should be created on login automatically
-
-    // Check if wallets exist
-    if (!wallets || wallets.length === 0) {
-      // still no wallet address → maybe show a loading or something
-      // or you can show "create wallet" button or forced wallet connection
-      return;
+      if (location.pathname !== '/login' && !hasNavigated.current) {
+        hasNavigated.current = true
+        navigate('/login', { replace: true })
+      }
+      return
     }
 
-    // If authenticated and wallet exists, redirect to Anon Aadhaar
-    navigate('/anon-aadhaar');
-  }, [ready, authenticated, wallets, navigate]);
+    // If authenticated but no wallet → just show loading, do nothing
+    if (!wallets || wallets.length === 0) return
 
-  // Can render spinner or nothing while determining state
-  return <div>Loading...</div>;
+    // If authenticated and wallet exists → redirect to anon-aadhaar once
+    if (location.pathname !== '/anon-aadhaar' && !hasNavigated.current) {
+      hasNavigated.current = true
+      navigate('/anon-aadhaar', { replace: true })
+    }
+  }, [ready, authenticated, wallets, navigate, location.pathname])
+
+  return <div>Loading…</div>
 }
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <Router>
+      <div className="min-h-screen bg-deepNavy text-white">
+        {/* 🔹 Common Header (only for your site pages) */}
+        <Header />
 
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/anon-aadhaar"
-          element={<AnonAadhaar />}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <Routes>
+            {/* Your routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/docs" element={<Docs />} />
+
+            {/* Friend’s routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/anon-aadhaar" element={<AnonAadhaar />} />
+            <Route path="/merkletree" element={<MerkleTreeComponent />} />
+
+            {/* Guarded route: If someone enters just "/", check auth */}
+            <Route path="/guard" element={<RequireWalletAndAuth />} />
+          </Routes>
+        </div>
+
+        {/* 🔹 Toast Notifications */}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: { background: '#0F172A', color: '#F1F5F9' },
+          }}
         />
-      <Route path="/merkletree" element={<MerkleTreeComponent />} />
-        <Route
-          path="/"
-          element={<RequireWalletAndAuth />}  // guard for initial route
-        />
-        
-      </Routes>
-    </BrowserRouter>
-  );
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
