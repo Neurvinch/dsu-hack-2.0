@@ -23,8 +23,8 @@ export default function Header() {
             <Shield className="w-6 h-6 text-deepNavy" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white">AnonSecure ZK</h1>
-            <p className="text-xs text-steelBlue">Zero-Knowledge Feedback System</p>
+            <h1 className="text-2xl font-bold text-white">Anonymous Feedback System</h1>
+           
           </div>
         </div>
         <div className="flex items-center space-x-6">
