@@ -1,7 +1,7 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
@@ -14,8 +14,8 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error(err));
 
 // Import routes (create files in routes/)
-const authRoutes = require('./routes/auth');
-const complaintRoutes = require('./routes/complaints');
+import authRoutes from './routes/auth.js';
+import complaintRoutes from './routes/complaints.js';
 app.use('/api/auth', authRoutes);
 app.use('/api/complaints', complaintRoutes);
 

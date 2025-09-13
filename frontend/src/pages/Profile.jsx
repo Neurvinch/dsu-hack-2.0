@@ -26,7 +26,7 @@ export default function Profile() {
       <h1 className="text-3xl font-bold mb-4">Profile & Alerts</h1>
       <p>Your submissions (hashes only): [List hashes]</p>
       {alerts.length > 0 && (
-        <div className="mt-4 p-4 bg-yellow-100 rounded">
+        <div className="mt-4 p-4 bg-yellow-400 rounded">
           <Bell className="w-5 h-5 inline mr-2" />
           Alerts: {alerts.map(a => a.message).join(', ')}
         </div>

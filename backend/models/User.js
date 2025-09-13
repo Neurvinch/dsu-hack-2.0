@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
   nullifierHash: { type: String, unique: true, sparse: true },  // Only for 'people' role

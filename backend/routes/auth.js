@@ -1,10 +1,9 @@
 // backend/routes/auth.js
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const authMiddleware = require('../middleware/auth');  // ✅ New import
-const router = express.Router();
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import authMiddleware from '../middleware/auth.js';
 
 // Anon Aadhaar login for 'people'
 router.post('/login-anon', async (req, res) => {

@@ -31,7 +31,7 @@ export default function PoliceDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-400 p-8">
       <h1 className="text-3xl font-bold mb-6">Police Dashboard</h1>
       {complaints.map((complaint) => (
         <div key={complaint._id} className="bg-white p-4 rounded shadow mb-4">

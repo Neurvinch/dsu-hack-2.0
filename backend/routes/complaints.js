@@ -1,9 +1,8 @@
-const express = require('express');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const PinataSDK = require('@pinata/sdk');
-const jwt = require('jsonwebtoken');
-const Complaint = require('../models/Complaint');
-const router = express.Router();
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import Complaint from '../models/Complaint.js';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import PinataSDK from '@pinata/sdk';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const pinata = new PinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SECRET);

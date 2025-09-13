@@ -4,6 +4,7 @@ import axios from "axios";
 // Import your Gemini chat component if separate
 // import GeminiChat from './GeminiChat';
 import AIChat from '../components/AIChat';
+import { MessageCircle } from 'lucide-react';
 
 export default function PeopleDashboard() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function PeopleDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-400 p-8">
       <h1 className="text-3xl font-bold mb-6">People Dashboard</h1>
       <div className="flex space-x-4 mb-6">
        

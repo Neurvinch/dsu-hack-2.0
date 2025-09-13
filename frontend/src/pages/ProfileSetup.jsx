@@ -46,7 +46,7 @@ export default function ProfileSetup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-indigo-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-indigo-400 flex items-center justify-center px-4">
       <main className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8">
         <h1 className="font-extrabold text-2xl text-gray-900 text-center mb-6">
           Set Up Your Profile
@@ -59,7 +59,7 @@ export default function ProfileSetup() {
               name="name"
               value={profile.name}
               onChange={handleChange}
-              className="w-full border rounded-md p-2"
+              className="w-full border rounded-md p-2 text-gray-900"
               required
             />
           </div>
@@ -68,8 +68,7 @@ export default function ProfileSetup() {
             <input
               type="text"
               value={profile.state}
-              disabled
-              className="w-full border rounded-md p-2 bg-gray-100"
+              className="w-full border rounded-md p-2 bg-gray-400 text-gray-900"
             />
           </div>
           <div>
@@ -78,7 +77,7 @@ export default function ProfileSetup() {
               type="text"
               value={profile.pincode}
               disabled
-              className="w-full border rounded-md p-2 bg-gray-100"
+              className="w-full border rounded-md p-2 bg-gray-400"
             />
           </div>
           <div>
@@ -87,7 +86,7 @@ export default function ProfileSetup() {
               type="text"
               value={profile.ageAbove18 ? "18+" : "Under 18"}
               disabled
-              className="w-full border rounded-md p-2 bg-gray-100"
+              className="w-full border rounded-md p-2 bg-gray-400"
             />
           </div>
           <div>
@@ -96,7 +95,7 @@ export default function ProfileSetup() {
               type="text"
               value={profile.gender}
               disabled
-              className="w-full border rounded-md p-2 bg-gray-100"
+              className="w-full border rounded-md p-2 bg-gray-400"
             />
           </div>
           <div>
